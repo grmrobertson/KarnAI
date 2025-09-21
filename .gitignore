@@ -1,5 +1,74 @@
-.venv/
+# Karn.ai Project .gitignore
+
+# Python
 __pycache__/
-dist/
+*.py[cod]
+*$py.class
+*.so
+.Python
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Generated IR files (keep samples but not generated outputs)
+data/ir_generated/
+data/test_output_*.json
+
+# Large data files (Scryfall bulk data)
+data/bulk_*.json
+data/oracle-cards-*.json
+data/default-cards-*.json
+
+# Logs
 *.log
+logs/
+
+# Docker
+.dockerignore
+
+# Future additions
+# notebooks/.ipynb_checkpoints/
+# models/trained_*.pkl
+# redis-data/
+# postgres-data/

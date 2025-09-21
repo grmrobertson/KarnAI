@@ -1,0 +1,42 @@
+# Core dependencies for Karn.ai Phase 1: Card Data Pipeline
+# Python 3.12+ compatible
+
+# HTTP requests for Scryfall API
+requests==2.31.0
+
+# JSON handling and data validation
+pydantic==2.4.2
+jsonschema==4.19.0
+
+# Data processing and analysis
+pandas==2.1.1
+numpy==1.25.2
+
+# Text processing for card ability parsing (NLP)
+spacy==3.7.2
+nltk==3.8.1
+
+# Configuration and environment management
+python-dotenv==1.0.0
+PyYAML==6.0.1
+
+# Testing framework
+pytest==7.4.2
+pytest-asyncio==0.21.1
+pytest-mock==3.11.1
+
+# Development tools
+black==23.9.1
+flake8==6.1.0
+mypy==1.6.0
+
+# Logging and debugging
+loguru==0.7.2
+
+# Future microservice dependencies (commented for now)
+# fastapi==0.104.0
+# uvicorn==0.23.2
+# redis==5.0.1
+# pymongo==4.5.0
+# psycopg2-binary==2.9.7
+# kafka-python==2.0.2

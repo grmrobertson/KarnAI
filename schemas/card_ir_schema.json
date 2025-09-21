@@ -1,0 +1,279 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Karn.ai Card Intermediate Representation",
+  "description": "Standard IR format for Magic: The Gathering cards used throughout the Karn.ai system",
+  "type": "object",
+  "properties": {
+    "ir_version": {
+      "type": "string",
+      "description": "Version of the IR schema",
+      "default": "1.0.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp when IR was generated"
+    },
+    "card_metadata": {
+      "type": "object",
+      "description": "Core card identification and metadata",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Card name"
+        },
+        "oracle_id": {
+          "type": "string",
+          "description": "Scryfall Oracle ID (unique across all printings)"
+        },
+        "scryfall_id": {
+          "type": "string",
+          "description": "Specific Scryfall card ID for this printing"
+        },
+        "mana_cost": {
+          "type": "string",
+          "description": "Mana cost in Scryfall format (e.g., '{2}{R}')"
+        },
+        "cmc": {
+          "type": "number",
+          "description": "Converted mana cost"
+        },
+        "type_line": {
+          "type": "string",
+          "description": "Full type line (e.g., 'Legendary Creature — Human Wizard')"
+        },
+        "oracle_text": {
+          "type": "string",
+          "description": "Current Oracle rules text"
+        },
+        "colors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["W", "U", "B", "R", "G"]
+          },
+          "description": "Card colors"
+        },
+        "color_identity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["W", "U", "B", "R", "G"]
+          },
+          "description": "Color identity for Commander format"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Keyword abilities"
+        },
+        "power": {
+          "type": ["string", "null"],
+          "description": "Creature power (null for non-creatures)"
+        },
+        "toughness": {
+          "type": ["string", "null"],
+          "description": "Creature toughness (null for non-creatures)"
+        },
+        "loyalty": {
+          "type": ["string", "null"],
+          "description": "Planeswalker loyalty (null for non-planeswalkers)"
+        }
+      },
+      "required": ["name", "oracle_id", "mana_cost", "cmc", "type_line", "oracle_text", "colors", "color_identity"]
+    },
+    "parsed_abilities": {
+      "type": "array",
+      "description": "Structured representation of card abilities",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ability_id": {
+            "type": "string",
+            "description": "Unique identifier for this ability"
+          },
+          "ability_type": {
+            "type": "string",
+            "enum": ["static", "activated", "triggered", "mana", "keyword"],
+            "description": "Type of ability"
+          },
+          "raw_text": {
+            "type": "string",
+            "description": "Original text of this ability"
+          },
+          "parsed_components": {
+            "type": "object",
+            "description": "Structured components of the ability",
+            "properties": {
+              "costs": {
+                "type": "array",
+                "description": "Activation or additional costs",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["mana", "tap", "sacrifice", "discard", "life", "other"]
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Cost value (e.g., '{2}{R}', 'Tap', '2 life')"
+                    }
+                  }
+                }
+              },
+              "triggers": {
+                "type": "array",
+                "description": "Trigger conditions for triggered abilities",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "condition": {
+                      "type": "string",
+                      "description": "Trigger condition"
+                    },
+                    "timing": {
+                      "type": "string",
+                      "enum": ["beginning", "end", "whenever", "when", "at"]
+                    }
+                  }
+                }
+              },
+              "effects": {
+                "type": "array",
+                "description": "Effects produced by the ability",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["damage", "draw", "search", "destroy", "exile", "counter", "pump", "create_token", "other"]
+                    },
+                    "targets": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Valid targets for this effect"
+                    },
+                    "value": {
+                      "type": ["string", "number"],
+                      "description": "Effect value (damage amount, cards drawn, etc.)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": ["ability_id", "ability_type", "raw_text"]
+      }
+    },
+    "strategic_tags": {
+      "type": "object",
+      "description": "Strategic classification for AI training and reward shaping",
+      "properties": {
+        "hierarchical_tags": {
+          "type": "array",
+          "description": "Hierarchical strategic tags",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Hierarchical tag path (e.g., ['interaction', 'removal', 'exile_effect'])"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Confidence in this tag assignment"
+              }
+            },
+            "required": ["path", "confidence"]
+          }
+        },
+        "flattened_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Flat list of all tags for quick lookup"
+        },
+        "archetype_hints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Commander archetype associations (e.g., 'aggro', 'control', 'combo', 'value')"
+        },
+        "reward_hints": {
+          "type": "object",
+          "description": "Hints for reward shaping",
+          "properties": {
+            "immediate_impact": {
+              "type": "boolean",
+              "description": "Does this card have immediate board impact?"
+            },
+            "delayed_impact": {
+              "type": "boolean",
+              "description": "Does this card provide delayed or conditional value?"
+            },
+            "symmetrical": {
+              "type": "boolean",
+              "description": "Does this card affect all players equally?"
+            },
+            "card_advantage": {
+              "type": "integer",
+              "description": "Expected card advantage (+1, 0, -1, etc.)"
+            }
+          }
+        }
+      },
+      "required": ["hierarchical_tags", "flattened_tags"]
+    },
+    "format_legality": {
+      "type": "object",
+      "description": "Format legality information",
+      "properties": {
+        "commander": {
+          "type": "string",
+          "enum": ["legal", "banned", "restricted", "not_legal"]
+        },
+        "can_be_commander": {
+          "type": "boolean",
+          "description": "Can this card be used as a commander?"
+        }
+      },
+      "required": ["commander"]
+    },
+    "gameplay_metadata": {
+      "type": "object",
+      "description": "Additional metadata for gameplay simulation",
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["hand", "battlefield", "graveyard", "exile", "library", "stack", "command"]
+          },
+          "description": "Zones this card can exist in"
+        },
+        "enters_tapped": {
+          "type": "boolean",
+          "description": "Does this permanent enter tapped?"
+        },
+        "has_abilities_in_graveyard": {
+          "type": "boolean",
+          "description": "Does this card have abilities while in graveyard?"
+        }
+      }
+    }
+  },
+  "required": ["ir_version", "generated_at", "card_metadata", "parsed_abilities", "strategic_tags", "format_legality"]
+}

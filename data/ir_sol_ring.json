@@ -1,0 +1,76 @@
+{
+  "ir_version": "1.0.0",
+  "generated_at": "2025-09-21T22:30:59.693116Z",
+  "card_metadata": {
+    "name": "Sol Ring",
+    "oracle_id": "6ad8011d-3471-4369-9d68-b264cc027487",
+    "scryfall_id": "ee6e5a35-fe21-4dee-b0ef-a8f2841511ad",
+    "mana_cost": "{1}",
+    "cmc": 1.0,
+    "type_line": "Artifact",
+    "oracle_text": "{T}: Add {C}{C}.",
+    "colors": [],
+    "color_identity": [],
+    "keywords": [],
+    "power": null,
+    "toughness": null,
+    "loyalty": null
+  },
+  "parsed_abilities": [
+    {
+      "ability_id": "sol_ring_main_effect",
+      "ability_type": "activated",
+      "raw_text": "{T}: Add {C}{C}.",
+      "parsed_components": {
+        "costs": [
+          {
+            "type": "tap",
+            "value": "Tap"
+          }
+        ],
+        "triggers": [],
+        "effects": []
+      }
+    }
+  ],
+  "strategic_tags": {
+    "hierarchical_tags": [
+      {
+        "path": [
+          "tempo",
+          "low_cost_interaction"
+        ],
+        "confidence": 0.8
+      }
+    ],
+    "flattened_tags": [
+      "low_cost_interaction",
+      "tempo"
+    ],
+    "archetype_hints": [
+      "aggro"
+    ],
+    "reward_hints": {
+      "immediate_impact": false,
+      "delayed_impact": true,
+      "symmetrical": false,
+      "card_advantage": 0
+    }
+  },
+  "format_legality": {
+    "commander": "legal",
+    "can_be_commander": false
+  },
+  "gameplay_metadata": {
+    "zones": [
+      "hand",
+      "battlefield",
+      "graveyard",
+      "exile",
+      "library",
+      "stack"
+    ],
+    "enters_tapped": false,
+    "has_abilities_in_graveyard": false
+  }
+}
