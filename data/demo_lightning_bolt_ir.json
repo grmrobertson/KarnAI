@@ -1,0 +1,91 @@
+{
+  "ir_version": "1.0.0",
+  "generated_at": "2025-09-21T22:37:48.122826Z",
+  "card_metadata": {
+    "name": "Lightning Bolt",
+    "oracle_id": "4457ed35-7c10-48c8-9776-456485fdf070",
+    "scryfall_id": "77c6fa74-5543-42ac-9ead-0e890b188e99",
+    "mana_cost": "{R}",
+    "cmc": 1.0,
+    "type_line": "Instant",
+    "oracle_text": "Lightning Bolt deals 3 damage to any target.",
+    "colors": [
+      "R"
+    ],
+    "color_identity": [
+      "R"
+    ],
+    "keywords": [],
+    "power": null,
+    "toughness": null,
+    "loyalty": null
+  },
+  "parsed_abilities": [
+    {
+      "ability_id": "lightning_bolt_main_effect",
+      "ability_type": "static",
+      "raw_text": "Lightning Bolt deals 3 damage to any target.",
+      "parsed_components": {
+        "costs": [],
+        "triggers": [],
+        "effects": [
+          {
+            "type": "damage",
+            "targets": [
+              "any target"
+            ],
+            "value": 3
+          }
+        ]
+      }
+    }
+  ],
+  "strategic_tags": {
+    "hierarchical_tags": [
+      {
+        "path": [
+          "interaction",
+          "removal"
+        ],
+        "confidence": 0.9
+      },
+      {
+        "path": [
+          "tempo",
+          "low_cost_interaction"
+        ],
+        "confidence": 0.8
+      }
+    ],
+    "flattened_tags": [
+      "removal",
+      "tempo",
+      "interaction",
+      "low_cost_interaction"
+    ],
+    "archetype_hints": [
+      "aggro",
+      "tempo"
+    ],
+    "reward_hints": {
+      "immediate_impact": true,
+      "delayed_impact": false,
+      "symmetrical": false,
+      "card_advantage": -1
+    }
+  },
+  "format_legality": {
+    "commander": "legal",
+    "can_be_commander": false
+  },
+  "gameplay_metadata": {
+    "zones": [
+      "hand",
+      "graveyard",
+      "exile",
+      "library"
+    ],
+    "enters_tapped": false,
+    "has_abilities_in_graveyard": false
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "ir_version": "1.0.0",
+  "generated_at": "2025-09-21T22:38:03.380709Z",
+  "card_metadata": {
+    "name": "Rhystic Study",
+    "oracle_id": "53236dd7-845a-444c-96d5-f41ed7325d8f",
+    "scryfall_id": "d6914dba-0d27-4055-ac34-b3ebf5802221",
+    "mana_cost": "{2}{U}",
+    "cmc": 3.0,
+    "type_line": "Enchantment",
+    "oracle_text": "Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.",
+    "colors": [
+      "U"
+    ],
+    "color_identity": [
+      "U"
+    ],
+    "keywords": [],
+    "power": null,
+    "toughness": null,
+    "loyalty": null
+  },
+  "parsed_abilities": [
+    {
+      "ability_id": "rhystic_study_main_effect",
+      "ability_type": "triggered",
+      "raw_text": "Whenever an opponent casts a spell, you may draw a card unless that player pays {1}.",
+      "parsed_components": {
+        "costs": [
+          {
+            "type": "mana",
+            "value": "{1}"
+          }
+        ],
+        "triggers": [],
+        "effects": []
+      }
+    }
+  ],
+  "strategic_tags": {
+    "hierarchical_tags": [
+      {
+        "path": [
+          "value",
+          "card_draw"
+        ],
+        "confidence": 0.9
+      }
+    ],
+    "flattened_tags": [
+      "card_draw",
+      "value"
+    ],
+    "archetype_hints": [],
+    "reward_hints": {
+      "immediate_impact": false,
+      "delayed_impact": true,
+      "symmetrical": false,
+      "card_advantage": 1
+    }
+  },
+  "format_legality": {
+    "commander": "legal",
+    "can_be_commander": false
+  },
+  "gameplay_metadata": {
+    "zones": [
+      "hand",
+      "battlefield",
+      "graveyard",
+      "exile",
+      "library",
+      "stack"
+    ],
+    "enters_tapped": false,
+    "has_abilities_in_graveyard": false
+  }
+}
